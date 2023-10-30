@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const userRouter = express.Router();
 const { BlackListModel } = require("../model/blackList.model");
+
 userRouter.post("/register", async (req, res) => {
     const { name, email, gender, password, age, city, is_married } = req.body
     try {
@@ -15,7 +16,7 @@ userRouter.post("/register", async (req, res) => {
             bcrypt.hash(password, 5, async (err, hash) => {
                 const user = UserModel({ name, email, gender, password: hash, age, city, is_married })
                 await user.save();
-                res.status(200).send({ "msg": "Account created" })
+                res.status(200).send({ "msg": "Account created." })
             });
         }
     } catch (error) {
